@@ -71,6 +71,27 @@ set_otg(state) - Set OTG power state
 get_pwr() - Query 12V power state (String/Binary)
 set_pwr(state) - Set 12V power state
 ```
+
+## Dependencies
+### usbip
+#### References -  
+[1](https://www.usenix.org/legacy/events/usenix05/tech/freenix/hirofuchi/hirofuchi.pdf)
+[2](https://3mdeb.com/firmware/linux-rpi-and-usb-over-ip/)
+
+```
+pi: $ sudo apt-get install usbip
+pi: $ sudo usbip list -l # gives a list of local usb devices
+pi: $ sudo modprobe usbip-host
+pi: $ sudo usbipd -D
+```
+### hub-ctl
+See [hub-ctrl.c](https://github.com/codazoda/hub-ctrl.c)
+
+### vhci-hcd
+```
+host: $ sudo modprobe vhci-hcd
+```
+
 ## Integrated with LAVA
 
 ### From the Device Dictionary
