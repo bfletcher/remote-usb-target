@@ -84,6 +84,7 @@ pi: $ sudo usbip list -l # gives a list of local usb devices
 pi: $ sudo modprobe usbip-host
 pi: $ sudo usbipd -D
 ```
+
 ### hub-ctl
 See [hub-ctrl.c](https://github.com/codazoda/hub-ctrl.c)
 
@@ -91,6 +92,11 @@ See [hub-ctrl.c](https://github.com/codazoda/hub-ctrl.c)
 ```
 host: $ sudo modprobe vhci-hcd
 ```
+
+### 12v switching hardware library
+To switch 12v I use the Adafruit MotorHAT. It's a PWM motor control board. Most of the work was to figure out how
+to NOT do PWM but just use the bridge transistors to switch DC 12v on/off.
+Adafruit_MotorHAT - Adafruit_PWM_Servo_Driver
 
 ## Integrated with LAVA
 
