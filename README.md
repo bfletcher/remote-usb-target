@@ -1,18 +1,20 @@
 # remote-usb-target
-Target board power and USB control over ethernet
+Replicating a USB connection over ethernet including target board 12v power and USB 5v power control.
 
 ## About this project
-When automating software tests deployed to embedded target devices it's generally useful to be able to control the target 
+When automating software tests deployed to embedded target devices it's generally necessary to be able to control the target 
 power/reset and also any other external interfaces (e.g. USB) that affect the testing. Doing this with commodity scalable
 hardware is a well-known problem for building test farms, but even with one or two boards on your desk it can get fiddly
-quite quickly. This was a proof-of-concept for the [LAVA On Your Desk boF](http://connect.linaro.org/resource/hkg18/hkg18-tr11/) 
+quite quickly. It's also quite cool for being tidy and possibly scable if you can send more functions down the same wire.
+This was a proof-of-concept for the [LAVA On Your Desk boF](http://connect.linaro.org/resource/hkg18/hkg18-tr11/) 
 session at Linaro Connect HKG18.
 
-## Target device control - 96Boards CE Edition
+## Target device control - quirks of the 96Boards CE Edition
 CE Edition 96Boards (e.g. Hikey, DB410C) have USB OTG ports which are used for loading images and firmware. However, when 
 powered, the OTG port disables the USB host ports, which it the primary route for connecting ethernet via USB-ethernet adaptors.
 You can't run deploy automated Linux-based tests that assume network functionality to these boards without USB OTG power 
-switching. The sequence of operations looks something like this:
+switching. 
+To work around this behaviour in an automated test setup, the sequence of operations needs to look something like this:
 1. Power on the OTG port
 2. Power up the board
 3. Load the image over OTG
@@ -33,6 +35,9 @@ switching. The sequence of operations looks something like this:
 3. Hikey6220 DUT
 
 ## How it works
+There's a data connection and a control connection:
+1. The data connection is USB-over-IP - replicating a USB connection (in this case fastboot) on a remote device
+2. The control connection is XML-RPC to control power and port switching
 The RPi runs an XML-RPC server which executes local functions to control:
 1. Power switching via 12V tolerant motor H-bridge board (Adafruit)
 2. USB on-off for OTG via local RPi root hub control
@@ -41,8 +46,8 @@ The RPi runs an XML-RPC server which executes local functions to control:
 5. A client on the PC invokes the XML-RPC calls on the RPi
 
 ## Operation
-On boot, RPi finds the USB-connected fastboot (Google) device and shares it over usbip
-IPs are static at the moment
+On boot, the RPi server connected to the target finds the USB-connected fastboot (Google) device and shares it over usbip.
+For more info, look at the docs for usbip. You need to load a kernel module on both the server and client IIRC.
 
 ### Tasks
 At start up on the RPi server:
@@ -50,7 +55,7 @@ At start up on the RPi server:
 2. start the `usbipd -D` daemon
 3. start the xmlrpc server 
 
-Each time you re-power the OTG port via the xmlrpc call (this is called the ‘pre-power’ command)
+Each time you re-power the OTG port via the xmlrpc call (this is called the ‘pre-power’ command in LAVA-speak)
 On the RPi server:
 1. power on the port
 2. Wait for the Hikey to initialise
@@ -111,3 +116,6 @@ commands:
     pre_power_command: python /usr/bin/rpcusb_client.py otg 1
     pre_os_command: python /usr/bin/rpcusb_client.py otg 0
 ```    
+
+# Todo
+IPs are static at the moment
