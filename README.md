@@ -38,6 +38,7 @@ To work around this behaviour in an automated test setup, the sequence of operat
 There's a data connection and a control connection:
 1. The data connection is USB-over-IP - replicating a USB connection (in this case fastboot) on a remote device
 2. The control connection is XML-RPC to control power and port switching
+
 The RPi runs an XML-RPC server which executes local functions to control:
 1. Power switching via 12V tolerant motor H-bridge board (Adafruit)
 2. USB on-off for OTG via local RPi root hub control
