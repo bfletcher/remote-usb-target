@@ -83,8 +83,8 @@ set_pwr(state) - Set 12V power state
 ## Dependencies
 ### usbip
 #### References -  
-[1](https://www.usenix.org/legacy/events/usenix05/tech/freenix/hirofuchi/hirofuchi.pdf)
-[2](https://3mdeb.com/firmware/linux-rpi-and-usb-over-ip/)
+[1 hirofuchi.pdf](https://www.usenix.org/legacy/events/usenix05/tech/freenix/hirofuchi/hirofuchi.pdf)
+[2 linux-rpi-and-usb-over-ip](https://3mdeb.com/firmware/linux-rpi-and-usb-over-ip/)
 
 ```
 pi: $ sudo apt-get install usbip
