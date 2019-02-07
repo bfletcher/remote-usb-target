@@ -57,6 +57,7 @@ At start up on the RPi server:
 3. start the xmlrpc server 
 
 Each time you re-power the OTG port via the xmlrpc call (this is called the ‘pre-power’ command in LAVA-speak)
+
 On the RPi server:
 1. power on the port
 2. Wait for the Hikey to initialise
@@ -64,6 +65,7 @@ On the RPi server:
 4. find the Google one 
 5. bind the Google one to usbip
 6. return
+
 On the PC client:
 1. call the USB port power-on RPC command & assume we wait for it to return
 2. list the remotely connected usb devices (dispatcher context, fortunately) and find the Google one/only shared one
