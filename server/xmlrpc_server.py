@@ -16,7 +16,7 @@ import xmlrpc_pwm
 otg_state = "unknown"
 pwr_state = "unknown"
 
-logging.warning('Starting xmlrpc server')  
+
 
 # System functions
 def init():
