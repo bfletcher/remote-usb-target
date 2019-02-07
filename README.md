@@ -48,7 +48,8 @@ The RPi runs an XML-RPC server which executes local functions to control:
 
 ## Operation
 On boot, the RPi server connected to the target finds the USB-connected fastboot (Google) device and shares it over usbip.
-For more info, look at the docs for usbip. You need to load a kernel module on both the server and client IIRC.
+For more info, look at the docs for usbip. You need to load a kernel module on both the server and client IIRC. See the 
+for more info on usbip.
 
 ### Tasks
 At start up on the RPi server:
@@ -82,8 +83,9 @@ set_pwr(state) - Set 12V power state
 
 ## Dependencies
 ### usbip
-#### References -  
+#### References for USBIP -  
 [1 hirofuchi.pdf](https://www.usenix.org/legacy/events/usenix05/tech/freenix/hirofuchi/hirofuchi.pdf)
+
 [2 linux-rpi-and-usb-over-ip](https://3mdeb.com/firmware/linux-rpi-and-usb-over-ip/)
 
 ```
